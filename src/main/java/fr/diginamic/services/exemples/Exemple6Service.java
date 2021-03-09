@@ -10,7 +10,6 @@ import fr.diginamic.composants.ui.DateField;
 import fr.diginamic.composants.ui.Form;
 import fr.diginamic.composants.ui.Selectable;
 import fr.diginamic.composants.ui.TextField;
-import fr.diginamic.services.exemples.entite.Vehicule;
 
 public class Exemple6Service extends MenuService {
 
@@ -31,14 +30,22 @@ public class Exemple6Service extends MenuService {
 		form.addInput(new DateField("Date de naissance :", "dateNaissance"));
 		
 		
+		
+		
+		/*
 		List<Selectable> vehicules = new ArrayList<>();
-		vehicules.add(new Vehicule(1L, "AA-552-CD", "Peugeot", "208"));
-		vehicules.add(new Vehicule(2L, "AW-227-XE", "Peugeot", "3008"));
-		vehicules.add(new Vehicule(3L, "XX-131-XT", "Peugeot", "3008"));
+		vehicules.add(new Vhl(1L, "AA-552-CD", "Peugeot", "208"));
+		vehicules.add(new Vhl(2L, "AW-227-XE", "Peugeot", "3008"));
+		vehicules.add(new Vhl(3L, "XX-131-XT", "Peugeot", "3008"));
 		
 		// Champ de type liste de sélection
 		form.addInput(new ComboBox("Liste de véhicules:", "vehicule", vehicules, vehicules.get(2)));
-
+		 */
+		
+		
+		
+		
+		
 		// Création d'un validator qui stocke les règles de gestion
 		Exemple6FormValidator validator = new Exemple6FormValidator();
 		

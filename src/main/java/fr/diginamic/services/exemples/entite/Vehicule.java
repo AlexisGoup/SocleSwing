@@ -1,93 +1,121 @@
 package fr.diginamic.services.exemples.entite;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
-import fr.diginamic.composants.ui.Selectable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-public class Vehicule implements Selectable {
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
-	private Long id;
-	private String immatriculation;
-	private String marque;
-	private String modele;
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Vehicule {
 	
-	public Vehicule(String immatriculation, String marque, String modele) {
-		super();
-		this.immatriculation = immatriculation;
-		this.marque = marque;
-		this.modele = modele;
-	}
-
-	public Vehicule(Long id, String immatriculation, String marque, String modele) {
-		super();
-		this.id = id;
-		this.immatriculation = immatriculation;
-		this.marque = marque;
-		this.modele = modele;
-	}
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	protected Long id;
 	
-	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof Vehicule)) {
-			return false;
-		}
-		Vehicule autre = (Vehicule)obj;
-		return new EqualsBuilder().append(id, autre.getId()).isEquals();
-	}
-
-	@Override
-	public String toString() {
-		return immatriculation;
-	}
+	protected String immatriculation;
 	
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-	/**
-	 * @return the immatriculation
-	 */
-	public String getImmatriculation() {
-		return immatriculation;
-	}
-	/**
-	 * @param immatriculation the immatriculation to set
-	 */
-	public void setImmatriculation(String immatriculation) {
-		this.immatriculation = immatriculation;
-	}
-	/**
-	 * @return the marque
-	 */
+	protected String marque;
+	
+	protected String modele;
+
+	@ManyToOne
+	@JoinColumn(name="TypeVehicule_ID")
+	protected TypeVehicule typeVehicule;
+	
+	protected Integer kilometrage;
+	
+	protected StatutVehicule statutVehicule;
+	
+	protected String commentaire;
+	
+	@OneToMany(mappedBy="vehicule")
+	@NotFound(action=NotFoundAction.IGNORE)
+	protected List<OperationMtnc> operationMtnc = new ArrayList<OperationMtnc>();
+	
+	public Vehicule() {}
+	
 	public String getMarque() {
 		return marque;
 	}
-	/**
-	 * @param marque the marque to set
-	 */
+
 	public void setMarque(String marque) {
 		this.marque = marque;
 	}
-	/**
-	 * @return the modele
-	 */
+
 	public String getModele() {
 		return modele;
 	}
-	/**
-	 * @param modele the modele to set
-	 */
+
 	public void setModele(String modele) {
 		this.modele = modele;
 	}
 
+	public Long getId() {
+		return id;
+	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getImmatriculation() {
+		return immatriculation;
+	}
+
+	public void setImmatriculation(String immatriculation) {
+		this.immatriculation = immatriculation;
+	}
+
+	public TypeVehicule getTypeVehicule() {
+		return typeVehicule;
+	}
+
+	public void setTypeVehicule(TypeVehicule typeVehicule) {
+		this.typeVehicule = typeVehicule;
+	}
+
+	public Integer getKilometrage() {
+		return kilometrage;
+	}
+
+	public void setKilometrage(Integer kilometrage) {
+		this.kilometrage = kilometrage;
+	}
+
+	public StatutVehicule getStatutVehicule() {
+		return statutVehicule;
+	}
+
+	public void setStatutVehicule(StatutVehicule statutVehicule) {
+		this.statutVehicule = statutVehicule;
+	}
+
+	public String getCommentaire() {
+		return commentaire;
+	}
+
+	public void setCommentaire(String commentaire) {
+		this.commentaire = commentaire;
+	}
+
+	public List<OperationMtnc> getOperationMtnc() {
+		return operationMtnc;
+	}
+
+	public void setOperationMtnc(List<OperationMtnc> operationMtnc) {
+		this.operationMtnc = operationMtnc;
+	}
+	
 }
